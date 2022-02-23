@@ -1,13 +1,15 @@
 package ru.job4j.forum.controller;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.job4j.forum.model.User;
 import ru.job4j.forum.service.SecurityService;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletResponse;
 
 
 @Controller
@@ -33,24 +35,12 @@ public class LoginControl {
         return "login";
     }
 
-    @PostMapping("/login")
-    public String loginCheck(@RequestParam("username") String username,
-                             @RequestParam("password") String password,
-                             Model model,
-                             HttpServletRequest request) {
-        User user = service.findUserByUsername(username);
-        if (user != null && password.equals(user.getPassword())) {
-            model.addAttribute("user", user);
-            HttpSession session = request.getSession();
-            session.setAttribute("user", user);
-            return "redirect:/index";
-        }
-        return "redirect:/login?error=true";
-    }
-
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logoutPage(HttpServletRequest request) {
-        request.getSession().invalidate();
+    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
         return "redirect:/login?logout=true";
     }
 }

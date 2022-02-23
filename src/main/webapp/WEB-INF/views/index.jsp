@@ -42,7 +42,7 @@
             <c:forEach items="${posts}" var="post">
                 <tr>
                     <td>
-                        <c:if test="${user != null && user.equals(post.user)}">
+                        <c:if test="${user != null && user.username.equals(post.user.username)}">
                             <a href='<c:url value="/update?id=${post.id}"/>'>
                                 <i class="fa fa-edit mr-3"></i>
                             </a>
