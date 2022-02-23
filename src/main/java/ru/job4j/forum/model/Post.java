@@ -1,19 +1,29 @@
 package ru.job4j.forum.model;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
 
+@Entity
+@Table(name = "posts")
 public class Post {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String description;
+    @Temporal(TemporalType.TIMESTAMP)
     private Calendar created;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
-    private List<Comment> comments = new ArrayList<>();
-    private final AtomicInteger commentId = new AtomicInteger(0);
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "posts_comments",
+            joinColumns = @JoinColumn(name = "post_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "comment_id", nullable = false))
+    private final List<Comment> comments = new ArrayList<>();
 
     public static Post of(String name, String description, User user) {
         Post post = new Post();
@@ -70,14 +80,6 @@ public class Post {
 
     public List<Comment> getComments() {
         return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
-    public AtomicInteger getCommentId() {
-        return commentId;
     }
 
     @Override

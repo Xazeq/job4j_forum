@@ -21,7 +21,7 @@ public class SecurityService {
     }
 
     public void saveUser(User user) {
-        userRepository.saveUser(user);
+        userRepository.save(user);
     }
 
     public boolean existsByUsername(String username) {
@@ -29,6 +29,6 @@ public class SecurityService {
     }
 
     public User findUserByUsername(String username) {
-        return userRepository.findUserByUsername(username);
+        return userRepository.findByUsername(username);
     }
 }
