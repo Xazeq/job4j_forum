@@ -37,7 +37,7 @@ public class PostControlTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("/edit"))
-                .andExpect(model().attributeExists("user", "post"));
+                .andExpect(model().attributeExists("user"));
     }
 
     @Test
@@ -55,7 +55,7 @@ public class PostControlTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("/post"))
-                .andExpect(model().attributeExists("user", "post"));
+                .andExpect(model().attributeExists("user"));
     }
 
     @Test
