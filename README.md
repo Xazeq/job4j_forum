@@ -1,5 +1,5 @@
 [![Build Status](https://app.travis-ci.com/Xazeq/job4j_forum.svg?branch=master)](https://app.travis-ci.com/Xazeq/job4j_forum)
-[![alt-text](https://img.shields.io/badge/-heroku-283e4a?style=flat&logo=heroku&logoColor=white)](https://gentle-island-48361.herokuapp.com/)
+
 
 ![](https://img.shields.io/badge/Maven-=_3-red)
 ![](https://img.shields.io/badge/Java-=_14-orange)
@@ -9,7 +9,9 @@
 ![](https://img.shields.io/badge/Checkstyle-lightgrey)
 
 ## Описание
-Веб приложение, реализующее функционал интернет форума. Позволяет создавать темы для обсуждения и оставлять комментарии.
+Веб приложение, реализующее функционал интернет форума. Позволяет создавать темы для обсуждения и оставлять комментарии. 
+
+Приложение развернуто на heroku [![alt-text](https://img.shields.io/badge/-heroku-283e4a?style=flat&logo=heroku&logoColor=white)](https://gentle-island-48361.herokuapp.com/)
 
 ## Технологии
 * Java 14
